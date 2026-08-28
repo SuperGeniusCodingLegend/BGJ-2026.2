@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2439908705839850846
+--- !u!1 &1274896781781803313
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4553291140524877834}
-  - component: {fileID: 4473367049444984936}
+  - component: {fileID: 6915352388369953874}
+  - component: {fileID: 3955296841064991553}
   m_Layer: 0
-  m_Name: '[Manager] Player Manager'
+  m_Name: '[Manager] Game Manager'
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: b1b079d053c3d0c41952dadf32a89ffd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4553291140524877834
+--- !u!4 &6915352388369953874
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439908705839850846}
+  m_GameObject: {fileID: 1274896781781803313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,20 +32,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4473367049444984936
+--- !u!114 &3955296841064991553
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439908705839850846}
+  m_GameObject: {fileID: 1274896781781803313}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1991ba9d99f6d964ba5b1d3225d7e5b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f01b4c6dae74cc44b99c20d5d677a2f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.PlayerManager
-  input: {fileID: 0}
-  moveController: {fileID: 0}
-  lookController: {fileID: 0}
-  grabController: {fileID: 0}
-  interactionController: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager

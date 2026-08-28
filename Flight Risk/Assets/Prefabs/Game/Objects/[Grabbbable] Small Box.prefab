@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1648651445958024249}
   - component: {fileID: 5591625469677375943}
   - component: {fileID: 3649372024822684732}
-  m_Layer: 10
+  m_Layer: 11
   m_Name: '[Grabbbable] Small Box'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
