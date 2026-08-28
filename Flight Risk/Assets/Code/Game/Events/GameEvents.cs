@@ -7,7 +7,7 @@ namespace FlightRisk.Game
     public static class GameEvents
     {
         public enum Game : uint { Start, Fail, End }
-        public enum Plane : uint { Start = 10, Update, Crash, End }
+        public enum Plane : uint { Start = 10, PullingUp, AngleStallingZoneEntered, AngleStallingZoneExited, AngleDangerZoneEntered, AngleDangerZoneExited, Crash, End }
         public enum Passengers : uint { Start = 20, Update, End }
         public enum Encounters : uint { Start = 30, Spawn, Update, Success, Fail, End }
         public enum Interactions : uint { Enter = 40, Exit, TakeItem, GiveItem, OpenDialog, FireEffect }
@@ -19,7 +19,11 @@ namespace FlightRisk.Game
             { (uint)Game.End, new UnityEvent<object>() },
 
             { (uint)Plane.Start, new UnityEvent<object>() },
-            { (uint)Plane.Update, new UnityEvent<object>() },
+            { (uint)Plane.PullingUp, new UnityEvent<object>() },
+            { (uint)Plane.AngleStallingZoneEntered, new UnityEvent<object>() },
+            { (uint)Plane.AngleStallingZoneExited, new UnityEvent<object>() },
+            { (uint)Plane.AngleDangerZoneEntered, new UnityEvent<object>() },
+            { (uint)Plane.AngleDangerZoneExited, new UnityEvent<object>() },
             { (uint)Plane.Crash, new UnityEvent<object>() },
             { (uint)Plane.End, new UnityEvent<object>() },
 
