@@ -9,7 +9,7 @@ namespace FlightRisk.Game.Player
         [SerializeField] private float moveSpeed;
         [SerializeField] private float friction = 0.8f;
 
-        private void FixedUpdate()
+        private void Update()
         {
             if (input && input.Move.IsActuated()) Move();
             else Stop();
@@ -26,8 +26,8 @@ namespace FlightRisk.Game.Player
         private void Stop()
         {
             var vel = body.linearVelocity;
-            vel.x *= friction;
-            vel.z *= friction;
+            vel.x *= friction * (1 - Time.deltaTime);
+            vel.z *= friction * (1 - Time.deltaTime);
             body.linearVelocity = vel;
         }
     }
