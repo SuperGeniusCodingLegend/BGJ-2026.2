@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f33d690d61110a34fb2b4f55da2b2f95
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185296
+  packageName: Airliner - aircraft with interior
+  packageVersion: 2.0
+  assetPath: Assets/Airliner - aircraft with interior/models/Materials/M_Business_seat.001.mat
+  uploadId: 612870

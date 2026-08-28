@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fc25ca613d2b1f7429b65703b078824b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 185296
+  packageName: Airliner - aircraft with interior
+  packageVersion: 2.0
+  assetPath: Assets/Airliner - aircraft with interior/models/Materials/M_Panels_2.mat
+  uploadId: 612870
