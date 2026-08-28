@@ -1,0 +1,5 @@
+# Keep the Packages folder tracked, but ignore generated subfolders
+/Packages/*
+!/Packages/manifest.json
+!/Packages/packages-lock.json
+
