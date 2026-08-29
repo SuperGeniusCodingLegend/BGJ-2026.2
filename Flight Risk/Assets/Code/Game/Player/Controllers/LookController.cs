@@ -13,7 +13,7 @@ namespace FlightRisk.Game.Player
 
         private Vector3 lookTarget;
 
-        private void Awake()
+        private void Start()
         {
             lookTarget = new(verticalRotator.localEulerAngles.x, horizontalRotator.localEulerAngles.y, 0);
         }

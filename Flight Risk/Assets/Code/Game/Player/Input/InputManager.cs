@@ -5,8 +5,10 @@ using FlightRisk.Game.Player.Input;
 
 namespace FlightRisk.Game.Player
 {
-    public class InputManager : MonoBehaviour
+    public class InputManager : MonoBehaviour , IServiceProvider<InputManager>
     {
+        public InputManager OfferService() => this;
+
         public InputAxis Move;
         public InputAxis Look;
         public InputButton Primary; // Give Item, Fire etc
@@ -18,6 +20,11 @@ namespace FlightRisk.Game.Player
         public void GetPrimaryInput(InputAction.CallbackContext ctx) => HandleCallback(Primary, ctx);
         public void GetSecondaryInput(InputAction.CallbackContext ctx) => HandleCallback(Secondary, ctx);
         // Other gets for buttons go here
+
+        private void Awake()
+        {
+            this.InjectService();
+        }
 
         private void HandleCallback(GameInput input, InputAction.CallbackContext ctx)
         {

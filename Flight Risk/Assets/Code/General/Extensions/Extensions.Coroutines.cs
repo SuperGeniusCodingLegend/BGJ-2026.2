@@ -36,5 +36,13 @@ namespace FlightRisk
             yield return null;
             afterFrame?.Invoke();
         }
+
+        public static void WaitUntill(this object obj, Func<bool> predicate, Action afterWait) => CoroutineRunner.Run(WaitUntillRoutine(predicate, afterWait));
+
+        private static IEnumerator WaitUntillRoutine(Func<bool> predicate, Action afterWait)
+        {
+            yield return new WaitUntil(predicate);
+            afterWait?.Invoke();
+        }
     }
 }
