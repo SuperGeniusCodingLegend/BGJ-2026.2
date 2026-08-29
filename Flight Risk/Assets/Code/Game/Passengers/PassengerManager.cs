@@ -5,7 +5,7 @@ using FlightRisk.Game.Passengers;
 
 namespace FlightRisk.Game
 {
-    public class PassengerManager : MonoBehaviour
+    public class PassengerManager : MonoBehaviour , IServiceProvider<PassengerManager>
     {
         private const int MIN_PASSENGER_SPAWN_POINTS = 1;
         private const int MIN_PASSENGER_PREFABS = 1;
@@ -16,6 +16,7 @@ namespace FlightRisk.Game
         private const int MIN_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE = 0;
         private const int MAX_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE = 100;
 
+        [SerializeField] private Transform passengerPool;
         [SerializeField] private List<Transform> passengerSpawnPoints;
         [SerializeField] private List<PassengerEntity> passengerPrefabs;
 
@@ -40,6 +41,7 @@ namespace FlightRisk.Game
             }
 
             SpawnPassengers();
+            this.InjectService(this);
         }
 
         private void SpawnPassengers()
@@ -68,10 +70,14 @@ namespace FlightRisk.Game
 
         private void SpawnPassenger(int spawnPointIndex)
         {
-            PassengerEntity passengerPrefab = passengerPrefabs[Random.Range(0, passengerPrefabs.Count)];
-            Transform spawnPoint = passengerSpawnPoints[spawnPointIndex];
-            PassengerEntity passengerInstance = Instantiate(passengerPrefab, spawnPoint.position, spawnPoint.rotation);
-            freePassengers.Add(passengerInstance);
+            PassengerEntity passenger = 
+                Instantiate(
+                    passengerPrefabs[Random.Range(0, passengerPrefabs.Count)],
+                    passengerSpawnPoints[spawnPointIndex].position,
+                    passengerSpawnPoints[spawnPointIndex].rotation,
+                    passengerPool);
+
+            freePassengers.Add(passenger);
         }
 
         public PassengerEntity GetFreePassenger()

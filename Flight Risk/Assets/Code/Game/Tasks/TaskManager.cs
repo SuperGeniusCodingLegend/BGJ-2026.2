@@ -55,9 +55,11 @@ namespace FlightRisk.Game
 
         }
 
-        private Task CreateTask()
+        private Task CreateActiveTask(Task taskPrefab)
         {
-
+            var passenger = passengerManager.GetFreePassenger();
+            var task = Instantiate(taskPrefab, passenger.TaskParent);
+            return task;
         }
     }
 }

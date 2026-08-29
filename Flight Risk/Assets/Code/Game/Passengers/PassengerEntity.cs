@@ -6,7 +6,11 @@ namespace FlightRisk.Game.Passengers
     {
         public enum Mood { Happy, Depressed, Angry, Stuckup, Asshole }
 
-        [SerializeField] private Transform taskParent;
+        public Transform TaskParent => taskParent;
+
         [SerializeField] private Mood defaultMood;
+        [SerializeField] private Transform taskParent;
+
+        
     }
 }
