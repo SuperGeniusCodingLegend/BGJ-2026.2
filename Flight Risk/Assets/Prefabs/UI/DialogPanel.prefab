@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 6480317486716331354}
   - component: {fileID: 6243383646668789435}
   m_Layer: 5
-  m_Name: SpeakerBacckground
+  m_Name: SpeakerBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1293,16 +1293,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b01e806e5fc623698c698f02bbb7f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.UI.DialogUI
+  dialogManager: {fileID: 0}
   panelGO: {fileID: 8606389681599478654}
-  speakerText: {fileID: 7671719429273773612}
-  bodyText: {fileID: 5014051465921447982}
-  choiceRows:
-  - {fileID: 2019688520205602196}
-  - {fileID: 5012958820554499451}
-  - {fileID: 5922168512713401965}
-  - {fileID: 7901474970937332444}
-  normalChoiceColor: {r: 0, g: 0, b: 0, a: 1}
-  highlightedChoiceColor: {r: 0, g: 0, b: 0, a: 1}
+  speakerGO: {fileID: 2952814305088407130}
+  bodyGO: {fileID: 3613160203318888235}
+  choiceRowGOs:
+  - {fileID: 2791899926967584137}
+  - {fileID: 4092289614475582330}
+  - {fileID: 6271426857956835348}
+  - {fileID: 2746009696757571288}
   audioSource: {fileID: 0}
 --- !u!1 &9182305154329341684
 GameObject:

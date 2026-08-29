@@ -25,6 +25,17 @@ namespace FlightRisk.Game.Dialogs
             GameEvents.TryInvoke((uint)GameEvents.Dialog.NodeShown, currentNode);
         }
 
+        public void SelectChoice(int index)
+        {
+            if (currentNode == null || currentNode.Choices == null || index < 0 || index >= currentNode.Choices.Count)
+            {
+                return;
+            }
+
+            highlightedChoiceIndex = index;
+            Confirm();
+        }
+
         public void Confirm()
         {
             if (currentNode == null) return;

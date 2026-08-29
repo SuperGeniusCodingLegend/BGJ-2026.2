@@ -1,6 +1,7 @@
 using FlightRisk.Game.Dialogs;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace FlightRisk.Game.Player
 {
@@ -11,7 +12,7 @@ namespace FlightRisk.Game.Player
         [SerializeField] private float confirmCooldown = 0.2f;
         private float confirmTimer;
         private bool dialogActive;
-        private bool verticalInputConsumed;
+        private bool horizontalInputConsumed;
 
         private void Awake()
         {
@@ -32,19 +33,21 @@ namespace FlightRisk.Game.Player
                 confirmTimer -= Time.deltaTime;
             }
 
-            float verticalAxis = input.Move.CurrentAxis.y;
+            float horizontalAxis = input.Move.CurrentAxis.x;
 
-            if (Mathf.Abs(verticalAxis) < AXIS_THRESHOLD)
+            if (Mathf.Abs(horizontalAxis) < AXIS_THRESHOLD)
             {
-                verticalInputConsumed = false;
+                horizontalInputConsumed = false;
             }
-            else if (!verticalInputConsumed)
+            else if (!horizontalInputConsumed)
             {
-                dialogManager.CycleChoice(verticalAxis > 0 ? -1: 1);
-                verticalInputConsumed = true;
+                dialogManager.CycleChoice(horizontalAxis > 0 ? -1: 1);
+                horizontalInputConsumed = true;
             }
 
-            if (confirmTimer <= 0 && (input.Primary.WasActuatedThisFrame() || input.Secondary.WasActuatedThisFrame()))
+            if (confirmTimer <= 0
+                && !EventSystem.current.IsPointerOverGameObject()
+                && (input.Primary.WasActuatedThisFrame() || input.Secondary.WasActuatedThisFrame()))
             {
                 dialogManager.Confirm();
                 confirmTimer = confirmCooldown;
@@ -56,7 +59,7 @@ namespace FlightRisk.Game.Player
             dialogActive = true;
             confirmTimer = confirmCooldown;
         }
-        
+
         private void OnDialogEnd(object payload) => dialogActive = false;
     }
 }

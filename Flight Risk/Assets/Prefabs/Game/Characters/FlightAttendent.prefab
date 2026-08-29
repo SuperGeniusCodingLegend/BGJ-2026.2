@@ -30,8 +30,111 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4321805116911282290}
+  - {fileID: 2187518307493069070}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 85.952, z: 0}
+--- !u!1 &7834986265619730254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2187518307493069070}
+  - component: {fileID: 2924625378066645418}
+  - component: {fileID: 1122502400001640301}
+  - component: {fileID: 8016298211017947403}
+  m_Layer: 10
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2187518307493069070
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834986265619730254}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: -0.9696215, z: -0, w: -0.24461031}
+  m_LocalPosition: {x: -0.0001, y: 0.0317, z: 0.0054}
+  m_LocalScale: {x: 0.02314547, y: 0.051057003, z: 0.02047965}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 692814348092436401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2924625378066645418
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834986265619730254}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 1, z: 1.0000002}
+  m_Center: {x: -0.00000012368514, y: 0, z: -0.000004038122}
+--- !u!114 &1122502400001640301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834986265619730254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb9665db4d5e5bf61a9d18642b0dc918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.Dialogs.DialogTrigger
+  openingNode: {fileID: 11400000, guid: 0ca1685a94f7a63d2bbbf3a3911350df, type: 2}
+--- !u!114 &8016298211017947403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834986265619730254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fd3bb42dfa8a7439d2e946d5d1c3a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.Interactions.Interactable
+  actionPrompt: 
+  onEnterInteractRaycast:
+    m_PersistentCalls:
+      m_Calls: []
+  onExitInteractRaycast:
+    m_PersistentCalls:
+      m_Calls: []
+  onInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1122502400001640301}
+        m_TargetAssemblyTypeName: FlightRisk.Game.Dialogs.DialogTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialog
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8540508552231636401
 GameObject:
   m_ObjectHideFlags: 0
