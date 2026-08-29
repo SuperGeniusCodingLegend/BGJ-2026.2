@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3642907884374557886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5659995798338284741}
+  - component: {fileID: 958841235876323429}
+  m_Layer: 0
+  m_Name: '[Controller] Dialog Controller'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5659995798338284741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642907884374557886}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6659359584576665535}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &958841235876323429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3642907884374557886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddcf3b7be78048f118b62fe8c5930d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.Player.DialogController
+  dialogManager: {fileID: 0}
+  confirmCooldown: 0.2
 --- !u!1 &4270055390684638744
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,7 +295,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60
+    FieldOfView: 65.5
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -318,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.Player.LookController
   verticalRotator: {fileID: 4761792466353841487}
   horizontalRotator: {fileID: 1648641152060145483}
-  lookBaseSpeed: {x: 0.05, y: 0.025}
+  lookBaseSpeed: {x: 1, y: 1}
   verticalLookLimit: 80
   smoothTime: 1
 --- !u!1 &8143601271980885669
@@ -558,7 +604,7 @@ Transform:
   m_GameObject: {fileID: 8260257637809355096}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: -1.388, y: 6.473, z: 32.974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -585,7 +631,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.28
-  m_Height: 3.43
+  m_Height: 2.49
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5491006223445155643
@@ -656,13 +702,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8927397077029985577}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6881874387457044737}
   - {fileID: 1648641152060145483}
+  - {fileID: 5659995798338284741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4509855736779581899
@@ -677,8 +724,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1991ba9d99f6d964ba5b1d3225d7e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.PlayerManager
-  input: {fileID: 4881951309462960170}
   moveController: {fileID: 2127894563080359487}
   lookController: {fileID: 6144709530451875221}
   grabController: {fileID: 3173947504096203913}
   interactionController: {fileID: 632174644941119315}
+  dialogController: {fileID: 0}
