@@ -37,6 +37,11 @@ namespace FlightRisk
             afterFrame?.Invoke();
         }
 
+        /// <summary>
+        /// Uses the coroutine runner to wait for a condition to be met.
+        /// </summary>
+        /// <param name="predicate">The condition for the wait to end.</param>
+        /// <param name="afterWait">What happens after the wait is over.</param>
         public static void WaitUntill(this object obj, Func<bool> predicate, Action afterWait) => CoroutineRunner.Run(WaitUntillRoutine(predicate, afterWait));
 
         private static IEnumerator WaitUntillRoutine(Func<bool> predicate, Action afterWait)

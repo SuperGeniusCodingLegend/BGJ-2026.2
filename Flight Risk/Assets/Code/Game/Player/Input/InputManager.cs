@@ -7,8 +7,6 @@ namespace FlightRisk.Game.Player
 {
     public class InputManager : MonoBehaviour , IServiceProvider<InputManager>
     {
-        public InputManager OfferService() => this;
-
         public InputAxis Move;
         public InputAxis Look;
         public InputButton Primary; // Give Item, Fire etc
@@ -23,7 +21,7 @@ namespace FlightRisk.Game.Player
 
         private void Awake()
         {
-            this.InjectService();
+            this.InjectService(this);
         }
 
         private void HandleCallback(GameInput input, InputAction.CallbackContext ctx)

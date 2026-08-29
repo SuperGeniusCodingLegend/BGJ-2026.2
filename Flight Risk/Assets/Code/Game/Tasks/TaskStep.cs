@@ -19,7 +19,7 @@ namespace FlightRisk.Game.Tasks
 
         protected abstract bool CheckStepComplete();
 
-        public virtual State StepStateTick()
+        public virtual State StepTick()
         {
             timer += Time.deltaTime;
             if (timer > timeToComplete) return State.Failed;

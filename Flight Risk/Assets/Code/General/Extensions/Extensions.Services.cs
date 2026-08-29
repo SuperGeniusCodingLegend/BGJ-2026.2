@@ -1,15 +1,12 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace FlightRisk
 {
     public static partial class Extensions
     {
-        public static bool InjectService<T>(this IServiceProvider<T> provider) where T : Component
+        public static bool InjectService<T>(this IServiceProvider<T> provider, T service) where T : Component
         {
-            T service = provider.OfferService();
-
             if (IServiceProvider<T>.Service != null && IServiceProvider<T>.Service != service) return false;
             if (service == null) return false;
 
