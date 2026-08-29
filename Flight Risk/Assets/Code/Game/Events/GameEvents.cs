@@ -11,6 +11,7 @@ namespace FlightRisk.Game
         public enum Passengers : uint { Start = 20, Update, End }
         public enum Encounters : uint { Start = 30, Spawn, Update, Success, Fail, End }
         public enum Interactions : uint { Enter = 40, Exit, TakeItem, GiveItem, OpenDialog, FireEffect }
+        public enum Dialog : uint { Start = 50, End, NodeShown, ChoiceHighlighted }
 
         private static readonly Dictionary<uint, UnityEvent<object>> eventPool = new()
         {
@@ -42,6 +43,11 @@ namespace FlightRisk.Game
             { (uint)Interactions.GiveItem, new UnityEvent<object>() },
             { (uint)Interactions.OpenDialog, new UnityEvent<object>() },
             { (uint)Interactions.FireEffect, new UnityEvent<object>() },
+
+            { (uint)Dialog.Start, new UnityEvent<object>() },
+            { (uint)Dialog.End, new UnityEvent<object>() },
+            { (uint)Dialog.NodeShown, new UnityEvent<object>() },
+            { (uint)Dialog.ChoiceHighlighted, new UnityEvent<object>() }
         };
 
         public static bool TrySubscribe(uint eventID, UnityAction<object> action)
