@@ -16,6 +16,8 @@ namespace FlightRisk.Game
         private const int MIN_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE = 0;
         private const int MAX_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE = 100;
 
+        private Passenger RandomPassengerPrefab => passengerPrefabs[Random.Range(0, passengerPrefabs.Count)];
+
         [SerializeField] private Transform passengerPool;
         [SerializeField] private List<Transform> passengerSpawnPoints;
         [SerializeField] private List<Passenger> passengerPrefabs;
@@ -25,8 +27,8 @@ namespace FlightRisk.Game
         [SerializeField, Range(MIN_REQUIRED_OCCUPANCY_PERCENTAGE, MAX_REQUIRED_OCCUPANCY_PERCENTAGE)] 
         private int requiredOccuppancySpawnPointPercentage = 50;
 
-        private readonly List<Passenger> freePassengers = new();
-        private readonly Dictionary<Passenger, int> occupiedPassengers = new();
+        private readonly HashSet<Passenger> freePassengers = new();
+        private readonly HashSet<Passenger> occupiedPassengers = new();
 
         private void Awake()
         {
@@ -54,7 +56,7 @@ namespace FlightRisk.Game
             for (int i = 0; i < requiredPassengerCount; i++)
             {
                 int spawnPointIndex = spawnPointIndicesShuffled[spawnPointIndicesShuffledIndex++];
-                SpawnPassenger(spawnPointIndex);
+                SpawnFreePassengerInPositionIndex(spawnPointIndex);
             }
 
             for (int i = requiredPassengerCount; i < passengerSpawnPoints.Count; i++)
@@ -63,49 +65,49 @@ namespace FlightRisk.Game
 
                 if (Random.Range(0, 100) <= optionalSpawnPointOccupancyChanceThreshold)
                 {
-                    SpawnPassenger(spawnPointIndex);
+                    SpawnFreePassengerInPositionIndex(spawnPointIndex);
                 }
             }
         }
 
-        private void SpawnPassenger(int spawnPointIndex)
+        private void SpawnFreePassengerInPositionIndex(int spawnPointIndex)
         {
-            Passenger passenger = 
-                Instantiate(
-                    passengerPrefabs[Random.Range(0, passengerPrefabs.Count)],
-                    passengerSpawnPoints[spawnPointIndex].position,
-                    passengerSpawnPoints[spawnPointIndex].rotation,
-                    passengerPool);
-
-            freePassengers.Add(passenger);
+            freePassengers.Add(SpawnPassenger(RandomPassengerPrefab, passengerSpawnPoints[spawnPointIndex]));
         }
 
-        public Passenger GetFreePassenger()
+        private Passenger SpawnPassenger(Passenger prefab, Transform spawnPoint)
         {
-            int passengerIndex = 0;
-            Passenger passenger = null;
+            var newPassenger = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation, passengerPool);
+            return newPassenger;
+        }
 
-            while (passenger == null)
+        public bool TryGetFreePassenger(out Passenger passenger)
+        {
+            passenger = null;
+
+            if (freePassengers.Count == 0)
             {
-                passengerIndex = Random.Range(0, passengerPrefabs.Count);
-                passenger = freePassengers[passengerIndex];
+                Debug.LogError("No free passengers left!");
+                return false;
             }
 
-            occupiedPassengers.Add(passenger, passengerIndex);
-            freePassengers[passengerIndex] = null;
+            passenger = freePassengers.OrderBy(p => Random.value).FirstOrDefault(); // TODO: Find a better alternative for this.
 
-            return passenger;
+            occupiedPassengers.Add(passenger);
+            freePassengers.Remove(passenger);
+
+            return true;
         }
 
         public void FreeUpPassenger(Passenger passenger)
         {
-            if (!occupiedPassengers.TryGetValue(passenger, out int passengerIndex))
+            if (!occupiedPassengers.Contains(passenger))
             {
-                Debug.LogError($"Passenger {passenger.gameObject.name} is not a part of the occupied passengers dictionary!");
+                Debug.LogError($"Passenger {passenger.gameObject.name} is not a part of the occupied passengers set!");
                 return;
             }
 
-            freePassengers[passengerIndex] = passenger;
+            freePassengers.Add(passenger);
             occupiedPassengers.Remove(passenger);
         }
     }

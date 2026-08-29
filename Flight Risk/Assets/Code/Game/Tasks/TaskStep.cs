@@ -21,11 +21,7 @@ namespace FlightRisk.Game.Tasks
 
         public virtual State StepTick()
         {
-            if (!started) 
-            {
-                EnterStep();
-                started = true;
-            }
+            if (!started) EnterStep();
 
             timer += Time.deltaTime;
 
@@ -48,6 +44,7 @@ namespace FlightRisk.Game.Tasks
         {
             Debug.Log($"{gameObject.name} was entered. Tick tock, time is ticking.");
             onStepEnter?.Invoke();
+            started = true;
         }
 
         protected virtual void CompleteStep()

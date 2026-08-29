@@ -57,12 +57,6 @@ namespace FlightRisk.Game
             GameEvents.TrySubscribe((uint)FlightRisk.Game.GameEvents.Plane.PullingUp, OnPlanePullingUp);
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-            
-        }
-
         void FixedUpdate()
         {
             if (hasCrashed)
@@ -112,12 +106,6 @@ namespace FlightRisk.Game
             currElevationFeet = Mathf.Clamp(currElevationFeet, MIN_ELEVATION_FEET, maxElevationFeet);
 
             isClimbing = false;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
         }
 
         private void OnPlanePullingUp(object eventPackage)

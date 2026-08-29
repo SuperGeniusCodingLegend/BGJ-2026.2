@@ -38,7 +38,7 @@ namespace FlightRisk.Game
                 var state = task.TaskTick();
                 if (state == Task.State.Active) continue;
 
-                if (state == Task.State.Complete) // TODO: Wire this through passengerManager?
+                if (state == Task.State.Complete) // TODO: Wire this through passenger manager? game manager?
                     GameStatus.PassengerSatisfaction += Mathf.Abs(task.SatisfactionGainOnComplete);
                 else 
                     GameStatus.PassengerSatisfaction -= Mathf.Abs(task.SatisfactionLossOnFail);
@@ -55,17 +55,19 @@ namespace FlightRisk.Game
 
         }
 
-        private Task CreateActiveTask(Task taskPrefab)
+        private bool TryCreateTask(Task taskPrefab, out Task createdTask)
         {
-            var passenger = passengerManager.GetFreePassenger();
-            var task = Instantiate(taskPrefab, passenger.TaskParent);
-            return task;
+            createdTask = null;
+            if (!passengerManager.TryGetFreePassenger(out var passenger)) return false;
+            createdTask = Instantiate(taskPrefab, passenger.TaskParent);
+            return true;
         }
 
         [ContextMenu("Test Create Task")]
         public void TestCreateTask()
         {
-            runningTasks.Add(CreateActiveTask(regularTasks[0]));
+            if (!TryCreateTask(regularTasks[0], out var task)) return;
+            runningTasks.Add(task);
         }
     }
 }

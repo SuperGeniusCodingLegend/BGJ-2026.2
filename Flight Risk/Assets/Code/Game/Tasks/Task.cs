@@ -19,15 +19,12 @@ namespace FlightRisk.Game.Tasks
         [SerializeField] protected UnityEvent onTaskFail;
 
         private TaskStep currentStep;
-        private int currentStepIndex = -1;
+        private int currentStepIndex;
+        private bool started;
 
         public virtual State TaskTick()
         {
-            if (currentStepIndex == -1)
-            {
-                AdvanceToNextStep();
-                StartTask();
-            }
+            if (!started) StartTask();  
 
             var state = currentStep.StepTick();
             if (state == TaskStep.State.Active) return State.Active;
@@ -58,8 +55,12 @@ namespace FlightRisk.Game.Tasks
 
         protected virtual void StartTask()
         {
+            currentStep = steps[0];
+
             Debug.Log($"{gameObject.name} was entered. Do it or you're fired.");
             onTaskStart?.Invoke();
+
+            started = true;
         }
 
         protected virtual void CompleteTask()
