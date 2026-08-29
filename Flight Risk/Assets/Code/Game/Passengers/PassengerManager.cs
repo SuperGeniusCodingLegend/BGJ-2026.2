@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using FlightRisk.Game.Passengers;
+using FlightRisk.Game.NPCs;
 
 namespace FlightRisk.Game
 {
@@ -18,15 +18,15 @@ namespace FlightRisk.Game
 
         [SerializeField] private Transform passengerPool;
         [SerializeField] private List<Transform> passengerSpawnPoints;
-        [SerializeField] private List<PassengerEntity> passengerPrefabs;
+        [SerializeField] private List<Passenger> passengerPrefabs;
 
         [SerializeField, Range(MIN_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE, MAX_OPTIONAL_OCCUPANCY_CHANCE_THRESHOLD_PERCENTAGE)] 
         private int optionalSpawnPointOccupancyChanceThreshold = 50;
         [SerializeField, Range(MIN_REQUIRED_OCCUPANCY_PERCENTAGE, MAX_REQUIRED_OCCUPANCY_PERCENTAGE)] 
         private int requiredOccuppancySpawnPointPercentage = 50;
 
-        private readonly List<PassengerEntity> freePassengers = new();
-        private readonly Dictionary<PassengerEntity, int> occupiedPassengers = new();
+        private readonly List<Passenger> freePassengers = new();
+        private readonly Dictionary<Passenger, int> occupiedPassengers = new();
 
         private void Awake()
         {
@@ -70,7 +70,7 @@ namespace FlightRisk.Game
 
         private void SpawnPassenger(int spawnPointIndex)
         {
-            PassengerEntity passenger = 
+            Passenger passenger = 
                 Instantiate(
                     passengerPrefabs[Random.Range(0, passengerPrefabs.Count)],
                     passengerSpawnPoints[spawnPointIndex].position,
@@ -80,10 +80,10 @@ namespace FlightRisk.Game
             freePassengers.Add(passenger);
         }
 
-        public PassengerEntity GetFreePassenger()
+        public Passenger GetFreePassenger()
         {
             int passengerIndex = 0;
-            PassengerEntity passenger = null;
+            Passenger passenger = null;
 
             while (passenger == null)
             {
@@ -97,7 +97,7 @@ namespace FlightRisk.Game
             return passenger;
         }
 
-        public void FreeUpPassenger(PassengerEntity passenger)
+        public void FreeUpPassenger(Passenger passenger)
         {
             if (!occupiedPassengers.TryGetValue(passenger, out int passengerIndex))
             {

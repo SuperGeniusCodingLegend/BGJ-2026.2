@@ -76,7 +76,7 @@ Transform:
   m_GameObject: {fileID: 5088628712327015229}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -677,7 +677,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1991ba9d99f6d964ba5b1d3225d7e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.PlayerManager
-  input: {fileID: 4881951309462960170}
   moveController: {fileID: 2127894563080359487}
   lookController: {fileID: 6144709530451875221}
   grabController: {fileID: 3173947504096203913}

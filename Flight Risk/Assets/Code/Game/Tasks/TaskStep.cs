@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace FlightRisk.Game.Tasks
 {
@@ -10,34 +9,56 @@ namespace FlightRisk.Game.Tasks
 
         public State CurrentState { get; protected set; } = State.Active;
 
-        [SerializeField] protected float timeToComplete;
+        [SerializeField] protected float timeToComplete = 60;
         [SerializeField] protected UnityEvent onStepEnter;
         [SerializeField] protected UnityEvent onStepComplete;
         [SerializeField] protected UnityEvent onStepFail;
 
         private float timer;
+        private bool started;
 
         protected abstract bool CheckStepComplete();
 
         public virtual State StepTick()
         {
+            if (!started) 
+            {
+                EnterStep();
+                started = true;
+            }
+
             timer += Time.deltaTime;
-            if (timer > timeToComplete) return State.Failed;
-            return CheckStepComplete() ? State.Complete : State.Active;
+
+            if (timer > timeToComplete) 
+            {
+                FailStep();
+                return State.Failed;
+            }
+            
+            if (CheckStepComplete())
+            {
+                CompleteStep();
+                return State.Complete;
+            }
+
+            return State.Active;
         }
 
-        public virtual void EnterStep()
+        protected virtual void EnterStep()
         {
+            Debug.Log($"{gameObject.name} was entered. Tick tock, time is ticking.");
             onStepEnter?.Invoke();
         }
 
-        public virtual void CompleteStep()
+        protected virtual void CompleteStep()
         {
+            Debug.Log($"{gameObject.name} was complete. You want a medal?");
             onStepComplete?.Invoke();
         }
 
-        public virtual void FailStep()
+        protected virtual void FailStep()
         {
+            Debug.Log($"{gameObject.name} has failed. YOU FUCKING IDIOT.");
             onStepFail?.Invoke();
         }
     }

@@ -4,11 +4,10 @@ using FlightRisk.Game.Tasks;
 
 namespace FlightRisk.Game
 {
-    /// <summary>
-    /// haha
-    /// </summary>
     public class TaskManager : MonoBehaviour , IRequireService<PassengerManager>
     {
+        public int CurrentRunningTasks;
+
         [SerializeField] private List<Task> regularTasks; // sprinkled across the game.
         [SerializeField] private List<Task> specialTasks; // at least one per a time threshold of our choosing.
 
@@ -26,6 +25,7 @@ namespace FlightRisk.Game
 
         private void Update()
         {
+            CurrentRunningTasks = runningTasks.Count;
             RunCurrentTasks();
         }
 
@@ -38,7 +38,7 @@ namespace FlightRisk.Game
                 var state = task.TaskTick();
                 if (state == Task.State.Active) continue;
 
-                if (state == Task.State.Complete)
+                if (state == Task.State.Complete) // TODO: Wire this through passengerManager?
                     GameStatus.PassengerSatisfaction += Mathf.Abs(task.SatisfactionGainOnComplete);
                 else 
                     GameStatus.PassengerSatisfaction -= Mathf.Abs(task.SatisfactionLossOnFail);
@@ -60,6 +60,12 @@ namespace FlightRisk.Game
             var passenger = passengerManager.GetFreePassenger();
             var task = Instantiate(taskPrefab, passenger.TaskParent);
             return task;
+        }
+
+        [ContextMenu("Test Create Task")]
+        public void TestCreateTask()
+        {
+            runningTasks.Add(CreateActiveTask(regularTasks[0]));
         }
     }
 }

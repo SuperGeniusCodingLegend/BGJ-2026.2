@@ -15,39 +15,37 @@ namespace FlightRisk.Game.Tasks
         [SerializeField] protected float satisfactionGainOnComplete;
         [SerializeField] protected float satisfactionLossOnFail;
         [SerializeField] protected UnityEvent onTaskStart;
-        [SerializeField] protected UnityEvent onTaskAdvance;
         [SerializeField] protected UnityEvent onTaskComplete;
         [SerializeField] protected UnityEvent onTaskFail;
 
         private TaskStep currentStep;
-        private int currentStepIndex;
+        private int currentStepIndex = -1;
 
         public virtual State TaskTick()
         {
-            if (currentStep == null)
+            if (currentStepIndex == -1)
             {
-                currentStep = steps[0];
-                onTaskStart?.Invoke();
+                AdvanceToNextStep();
+                StartTask();
             }
 
             var state = currentStep.StepTick();
             if (state == TaskStep.State.Active) return State.Active;
 
-            if (state == TaskStep.State.Failed) 
+            if (state == TaskStep.State.Failed)
             {
-                onTaskFail?.Invoke();
+                FailTask();
                 return State.Failed;
             }
 
-            if (currentStepIndex == steps.Count) 
+            if (currentStepIndex == steps.Count)
             {
-                onTaskComplete?.Invoke();
+                CompleteTask();
                 return State.Complete;
             }
             else
             {
                 AdvanceToNextStep();
-                onTaskAdvance?.Invoke();
                 return State.Active;
             }
         }
@@ -56,6 +54,24 @@ namespace FlightRisk.Game.Tasks
         {
             currentStepIndex++;
             currentStep = steps[currentStepIndex];
+        }
+
+        protected virtual void StartTask()
+        {
+            Debug.Log($"{gameObject.name} was entered. Do it or you're fired.");
+            onTaskStart?.Invoke();
+        }
+
+        protected virtual void CompleteTask()
+        {
+            Debug.Log($"{gameObject.name} was complete. Not very impressed.");
+            onTaskComplete?.Invoke();
+        }
+
+        protected virtual void FailTask()
+        {
+            Debug.Log($"{gameObject.name} has failed. HOW FUCKING DARE YOU.");
+            onTaskFail?.Invoke();
         }
     }
 }
