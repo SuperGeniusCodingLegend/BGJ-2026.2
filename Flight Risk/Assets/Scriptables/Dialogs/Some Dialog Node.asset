@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0853fe19a09deb1a2baa5fb2156ec0a1, type: 3}
+  m_Name: Some Dialog Node
+  m_EditorClassIdentifier: Assembly-CSharp::FlightRisk.Game.Dialogs.DialogNode
+  line:
+    speakerName: Elad
+    text: Hi I'm Elad and I'm a chair
+    lineAudio: {fileID: 0}
+  choices:
+  - text: ...
+    nextNode: {fileID: 11400000, guid: c274f41ee6e51061c863ac431c2a163b, type: 2}
+  - text: STFU!
+    nextNode: {fileID: 0}
+  autoAdvanceNode: {fileID: 0}
+  outcome: 0
