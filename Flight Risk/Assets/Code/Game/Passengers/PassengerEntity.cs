@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class PassengerEntity : MonoBehaviour
+namespace FlightRisk.Game.Passengers
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class PassengerEntity : MonoBehaviour
     {
-        
-    }
+        public enum Mood { Happy, Depressed, Angry, Stuckup, Asshole }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] private Transform taskParent;
+        [SerializeField] private Mood defaultMood;
     }
 }
