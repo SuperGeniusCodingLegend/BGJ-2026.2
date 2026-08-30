@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FlightRisk.Game.Player
 {
@@ -10,6 +11,8 @@ namespace FlightRisk.Game.Player
         [SerializeField] private float grabRaycastLimit = 4;
         [SerializeField] private float grabSpringForce = 400;
         [SerializeField] private float grabSpringDamper = 30;
+        [SerializeField] private UnityEvent onGrabStart;
+        [SerializeField] private UnityEvent onGrabEnd;
 
         private IGrabbable currentGrabbedObject;
         private SpringJoint currentGrabJoint;
@@ -51,6 +54,7 @@ namespace FlightRisk.Game.Player
             currentGrabbedObject.Grab();
 
             isGrabbing = true;
+            onGrabStart?.Invoke();
         }
 
         private void HoldCurrentObject()
@@ -64,6 +68,7 @@ namespace FlightRisk.Game.Player
             currentGrabbedObject.Release();
             currentGrabbedObject = null;
             isGrabbing = false;
+            onGrabEnd?.Invoke();
         }
 
         private bool CheckForGrabbables(out IGrabbable grabbable)
