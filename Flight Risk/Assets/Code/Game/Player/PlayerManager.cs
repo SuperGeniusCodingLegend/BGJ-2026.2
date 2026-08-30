@@ -3,8 +3,6 @@ using FlightRisk.Game.Player;
 
 namespace FlightRisk.Game
 {
-    public enum PlayerState { Idle, Grabbing, HoldingItem, Talking, Cockpit, }
-
     public class PlayerManager : MonoBehaviour
     {
         [SerializeField] private MoveController moveController;

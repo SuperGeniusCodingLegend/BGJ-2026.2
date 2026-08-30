@@ -6,7 +6,7 @@ namespace FlightRisk.Game
 {
     public static class GameEvents
     {
-        public enum Game : uint { Start, PlayerStateChange, Fail, End }
+        public enum Game : uint { Initialize, Start, Fail, End }
         public enum Plane : uint { Start = 10, PullingUp, AngleStallingZoneEntered, AngleStallingZoneExited, AngleDangerZoneEntered, AngleDangerZoneExited, Crash, End }
         public enum Passengers : uint { Start = 20, Update, End }
         public enum Encounters : uint { Start = 30, Spawn, Update, Success, Fail, End }

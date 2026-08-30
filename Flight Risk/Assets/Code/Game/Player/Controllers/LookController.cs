@@ -8,9 +8,8 @@ namespace FlightRisk.Game.Player
         [SerializeField] private Transform verticalRotator;
         [SerializeField] private Transform horizontalRotator;
         [SerializeField] private Vector2 lookBaseSpeed;
-        [SerializeField] private float verticalLookLimit = 80;
-        [SerializeField] private float horizontalLookLimit = 0;
-        [SerializeField] private float smoothTime = 0.1f;
+        [SerializeField, Range(0, 90)] private float verticalLookLimit = 80;
+        [SerializeField, Range(0, 180)] private float horizontalLookLimit = 0;
 
         private Vector3 lookTarget;
 
