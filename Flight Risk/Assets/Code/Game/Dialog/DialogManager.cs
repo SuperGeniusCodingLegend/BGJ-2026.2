@@ -2,13 +2,14 @@ using UnityEngine;
 
 namespace FlightRisk.Game.Dialogs
 {
-    public class DialogManager : MonoBehaviour
+    public class DialogManager : MonoBehaviour , IServiceProvider<DialogManager>
     {
         private DialogNode currentNode;
         private int highlightedChoiceIndex = 0;
 
         private void Awake()
         {
+            this.InjectService(this);
             GameEvents.TrySubscribe((uint)GameEvents.Interactions.OpenDialog, OnOpenDialog);
         }
 
@@ -21,6 +22,8 @@ namespace FlightRisk.Game.Dialogs
         {
             currentNode = node;
             highlightedChoiceIndex = 0;
+            Debug.Log($"[DialogManager] Started Dialog with node: {(currentNode ? currentNode.ToString() : "NULL")}.");
+
             GameEvents.TryInvoke((uint)GameEvents.Dialog.Start);
             GameEvents.TryInvoke((uint)GameEvents.Dialog.NodeShown, currentNode);
         }
@@ -29,6 +32,7 @@ namespace FlightRisk.Game.Dialogs
         {
             if (currentNode == null || currentNode.Choices == null || index < 0 || index >= currentNode.Choices.Count)
             {
+                Debug.LogError($"[DialogManager] Issues selecting a choice with current node {(currentNode ? currentNode.ToString() : "NULL")}.");
                 return;
             }
 
@@ -38,11 +42,15 @@ namespace FlightRisk.Game.Dialogs
 
         public void Confirm()
         {
-            if (currentNode == null) return;
+            if (currentNode == null) 
+            {
+                Debug.LogError($"[DialogManager] Tried to confirm with a null currentNode.");
+                return;
+            }
 
-            DialogNode target = currentNode.Choices != null && currentNode.Choices.Count > 0
-                ? currentNode.Choices[highlightedChoiceIndex].NextNode
-                : currentNode.AutoAdvanceNode;
+            DialogNode target =  currentNode.Choices != null && currentNode.Choices.Count > 0 ?
+                currentNode.Choices[highlightedChoiceIndex].NextNode :
+                currentNode.AutoAdvanceNode;
 
             if (target == null)
             {
@@ -52,6 +60,7 @@ namespace FlightRisk.Game.Dialogs
 
             currentNode = target;
             highlightedChoiceIndex = 0;
+            Debug.Log($"[DialogManager] Continued Dialog with node: {(currentNode ? currentNode.ToString() : "NULL")}.");
             GameEvents.TryInvoke((uint)GameEvents.Dialog.NodeShown, currentNode);
         }
 
@@ -69,6 +78,7 @@ namespace FlightRisk.Game.Dialogs
 
         private void EndDialog()
         {
+            Debug.Log($"[DialogManager] Ended Dialog with node: {(currentNode ? currentNode.ToString() : "NULL")}.");
             GameEvents.TryInvoke((uint)GameEvents.Dialog.End, currentNode);
             currentNode = null;
         }
